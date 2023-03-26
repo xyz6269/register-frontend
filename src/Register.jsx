@@ -1,54 +1,91 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [navigate, setNavigate] = useState('')
+function Register() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  });
+  
+  const navigate = useNavigate();
 
-    const submit = async () => {
-        await fetch('http://localhost:8080/lib/auth/register', {
-          method: 'POST',
-          headers:{'Content-Type':'application/json ; charset=UTF-8'},
-          body: JSON.stringify({
-               firstName,
-               lastName,
-               email,
-               password
-          })
-        });
-        setNavigate(true);
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
     };
-
-    if(navigate){
-    return <Navigate to="/login" />;
-    }
+    fetch('http://localhost:8080/lib/auth/register', requestOptions)
+      .then(response => {
+        if (response.ok) {
+          navigate('/login');
+        } else {
+          throw new Error('Registration failed');
+        }
+      })
+      .catch(error => console.log(error));
+  };
 
   return (
-    <form onSubmit={submit}>
-        <h1 className="h3 mb-3 fw-normal">Please register</h1>
+    <form onSubmit={handleSubmit}>
+      <div>
 
-        <input className="form-control" placeholder="first name" required 
-             onChange = {e => setFirstName(e.target.value)}
+        <input
+        className="form-control"
+          type="text"
+          name="firstName"
+          placeholder="first name"
+          value={formData.firstName}
+          onChange={handleInputChange}
+          required
         />
-
-        <input className="form-control" placeholder="last name" required 
-             onChange = {e => setLastName(e.target.value)}
+      </div>
+      <div>
+        
+        <input
+        className="form-control"
+          type="text"
+          name="lastName"
+          placeholder="last name"
+          value={formData.lastName}
+          onChange={handleInputChange}
+          required
         />
-
-        <input className="form-control" type="email" placeholder="email" required 
-             onChange = {e => setEmail(e.target.value)}
+      </div>
+      <div>
+ 
+        <input
+          className="form-control"
+          type="email"
+          name="email"
+          placeholder="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
         />
+      </div>
+      <div>
 
-        <input className="form-control" type="password" placeholder="password" required 
-             onChange = {e => setPassword(e.target.value)}
+        <input
+        className="form-control"
+          type="password"
+          name="password"
+          placeholder="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          required
         />
-
-        <button className="w-100 btn btn-lg btn-primary" type="submit"> Sign in</button>
+      </div>
+      <button className="w-100 btn btn-lg btn-primary" type="submit"> Sign in</button>    
     </form>
-  )
+  );
 }
-
 export default Register;
