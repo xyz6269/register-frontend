@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Book from './Book'
 import profileIcon from './user.png'
+import axios from 'axios';
+import cartIcon from './shopping_cart.png'
 import jwtDecode from 'jwt-decode';
 import Profile from './Profile';
 
@@ -11,6 +13,7 @@ function Home () {
     const [books, setBook] = useState([]);
     const [searchterm, setSearchTerm] = useState('');
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
         
     useEffect(()=> {
         fetch('http://localhost:8080/lib/books/allbooks')
@@ -20,13 +23,21 @@ function Home () {
         console.log("hhhhhhhhhhhhhhhhhhh");
     },[])
 
+   
     return (
         <div className="app">
             <h1> ESTO library </h1>
             <div>
              <img className='profileicon'
-             src={profileIcon}
-             onClick={navigate('/profile')
+             src={profileIcon} 
+             onClick={(e) => navigate('/profile')
+            }
+             />
+            </div>
+            <div>
+             <img className='carticon'
+             src={cartIcon} 
+             onClick={(e) => navigate('/cart')
             }
              />
             </div>
@@ -41,11 +52,11 @@ function Home () {
                   </div>
                 ) : (
                     <div className="empty"> 
-                    <h2> No movies found </h2>
+                    <h2> No books found </h2>
                     </div>
                 )   
             }
-             </div>
+            </div>
             
         </div>
     );

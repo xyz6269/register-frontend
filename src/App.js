@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Register";
 import Home from "./Home";
 import Profile from "./Profile";
+import Cart from "./Cart";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/login" Component={Login} />
             <Route path="/register" Component={Register} />
             <Route path="/profile" Component={Profile} />
+            <Route path="/cart" Component={Cart} />
           </Routes>
         </main>
       </BrowserRouter>

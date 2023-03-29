@@ -138,3 +138,13 @@
       height: 70px;
       border-radius: 60%;
     }
+
+    .carticon{
+      background-color: white;
+      position: absolute;
+      top: 85px;
+      left: 1800px;
+      width: 70px;
+      height: 70px;
+      border-radius: 60%;
+    }
