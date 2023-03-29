@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Home from "./Home";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -15,12 +16,26 @@ const Book = ({ book }) => {
       isAuthenticated = true;
     }
   
-    const handleClick = () => {
-      if (jwtDecode(token).exp > currentTime) {
+    const handleClick = (id) => {
+      if (jwtDecode(token).exp < currentTime) {
         console.log("shit")
         console.log(currentTime);
         return navigate("/login");
-      }
+      }else  {
+        console.log(token);
+        try {
+          axios.post(`http://localhost:8080/lib/user/addtocart/${id}`, {id} , 
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            } 
+          }
+          );
+        } catch (error) {
+          console.error(error);
+        }
+    
+    }
       console.log("dammmmmmmmmmmmmmmmmmmmmmmmmmmn")
        // Handle the click event here
     };
@@ -33,7 +48,7 @@ const Book = ({ book }) => {
                         <img src={book.cover !=="N/A" ? book.cover : 'https://via.placeholder.com/400' } alt="Not available"/>
                     </div>
                     <div>
-                        <button onClick={handleClick} className="form-control" > add to cart </button>
+                        <button onClick={() => handleClick(book.id)} className="form-control" > add to cart </button>
                     </div>
         </div>
     );
