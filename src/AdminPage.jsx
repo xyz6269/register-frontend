@@ -8,7 +8,8 @@ import cartIcon from './shopping_cart.png'
 import orderIcon from './orders.png'
 
 
-function Home () {
+const AdminPage = () => {
+
     const [books, setBook] = useState([]);
     const [searchterm, setSearchTerm] = useState('');
     const navigate = useNavigate();
@@ -22,10 +23,9 @@ function Home () {
         console.log("hhhhhhhhhhhhhhhhhhh");
     },[])
 
-   
     return (
         <div className="app">
-            <h1> ESTO library </h1>
+            <h1> ESTO library Management </h1>
             <div>
              <img className='profileicon'
              src={profileIcon} 
@@ -69,4 +69,4 @@ function Home () {
     );
 };
 
-export default Home;
+export default AdminPage;

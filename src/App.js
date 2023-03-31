@@ -9,6 +9,8 @@ import Register from "./Register";
 import Home from "./Home";
 import Profile from "./Profile";
 import Cart from "./Cart";
+import Order from "./Order";
+import Admin from "./AdminPage";
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
             <Route path="/register" Component={Register} />
             <Route path="/profile" Component={Profile} />
             <Route path="/cart" Component={Cart} />
+            <Route path="/orders" Component={Order} />
+            <Route path="/admin" Component={Admin} />
           </Routes>
         </main>
       </BrowserRouter>

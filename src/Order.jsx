@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Book from './Book';
-import exitbutton from './exit.png';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useEffect , useState } from "react";
+import exitbutton from './exit.png'
+import { Button } from "bootstrap";
 
-const Cart = () => {
+
+const Order = () =>{
   const [items, setItems] = useState([]);
   const token = localStorage.getItem('token');
   const navigate = useNavigate()
@@ -28,49 +30,53 @@ const Cart = () => {
     fetchCart();
   }, []);
 
-
-  const removeItem = async (id) => {
+  const submitOrder = async () => {
     console.log(token);
     try {
-      axios.delete(`http://localhost:8080/lib/user/delete/book/cart/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        } 
-      } ,
-      {id});
-    } catch (error) {
-      console.error(error);
-    }
+        const response = await axios.post(
+          'http://localhost:8080/lib/user/submitorder',
+          {
+            // Add any data you want to send in the request body here
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+    
+        console.log(response.data); // Do something with the response data here
+      } catch (error) {
+        console.error(error);
+      }
   };
-
-  // const exit = () => {
-  //   return navigate('/home');
-  //  }
 
 
   return (
     <div>
-      <h1>Cart</h1>
+      <h1> Order Managemet </h1>
      <div>
              <img className='exiticon'
              src={exitbutton} 
              onClick={(e) => navigate('/home')}
              />
+              <div>
+                    <button onClick={submitOrder} className="fixed-button" >sumit your order </button>
+             </div>
+
       </div>
             {
                 items?.length > 0
                 ?(
-                  <div className="container">
+                  <div>
                      {items.map((item) => (
-                     <div className="book" key={item.id}>
+                     <div className="record-card" key={item.id}>
                      <div>
                          <p>{item.isbn}</p>
                      </div>
                      <div>
                          <img src={item.cover !=="N/A" ? item.cover : 'https://via.placeholder.com/400' } alt="Not available"/>
-                     </div>
-                     <div>
-                         <button onClick={() => removeItem(item.id)} className="form-control" >remove from cart</button>
                      </div>
                      
                   </div>
@@ -78,31 +84,15 @@ const Cart = () => {
                   </div>
                 ) : (
                     <div className="empty"> 
-                    <h2> you're cart is empty  </h2>
+                    <h2> you're cart is empty you can't submit an empty order </h2>
                     </div>
-                )   
+                )  
+                
             }
             </div>
     
   );
 };
 
-export default Cart;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//       /delete/book/cart/{id}
+export default Order;

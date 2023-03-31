@@ -27,7 +27,25 @@ function Login() {
         if (data.token) {
           localStorage.setItem('token', data.token);
           console.log(data);
-          navigate('/home');
+          
+             axios.post(
+              'http://localhost:8080/lib/admin/isadmin',{},
+              {
+                headers: {
+                  Authorization: `Bearer ${data.token}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            ).then(response => {
+              if(response.status !== 200){
+                console.log(data.token);
+                navigate('/home');
+              }else {
+                console.log("hhhhhhhhhhhhhhhhhhhhhh achrif")
+                navigate('/admin');
+              }
+            })
+          
         } else {
           throw new Error('Login failed');
         }

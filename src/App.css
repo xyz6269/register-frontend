@@ -148,3 +148,64 @@
       height: 70px;
       border-radius: 60%;
     }
+
+    .exiticon{
+        background-color: white;
+        position: absolute;
+        top: 85px;
+        left: 1800px;
+        width: 70px;
+        height: 70px;
+        border-radius: 60%;
+    }
+    .ordericon{
+      background-color: white;
+      position: absolute;
+      top: 85px;
+      left: 1650px;
+      width: 70px;
+      height: 70px;
+      border-radius: 60%;
+    }
+    .record-card {
+      display: inline-block;
+      width: 300px; /* adjust as needed */
+      margin: 40px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      padding: 70px;
+      background-color: #fff;
+    }
+    
+    .record-card img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    .record-card p {
+      font-size: 1em;
+      margin: 0;
+      line-height: 1.2;
+    }
+    
+    .fixed-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #1169dd;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+    
+    .fixed-button:hover {
+      background-color: #3e8e41;
+    }
+    
