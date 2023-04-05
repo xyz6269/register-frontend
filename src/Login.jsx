@@ -8,6 +8,7 @@ function Login() {
     password: ''
   });
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -27,16 +28,27 @@ function Login() {
         if (data.token) {
           localStorage.setItem('token', data.token);
           console.log(data);
-          navigate('/home');
+          console.log(data.authorisations);
+          if (data.authorisations.length > 1){
+            navigate('/admin');
+          }else {
+            navigate('/home');
+          }
+
         } else {
           throw new Error('Login failed');
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+          
   };
 
   return (
+  
     <form onSubmit={handleSubmit}>
+      <h1>
+        AUTHENTIFICATION
+      </h1>
       <div>
         <input
         className="form-control"

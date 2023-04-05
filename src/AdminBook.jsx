@@ -3,8 +3,9 @@ import axios from "axios";
 import Home from "./Home";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import user from "./users.png"
-const Book = ({ book }) => {
+
+
+const AdminBook = ({ adminbook }) => {
     const token = localStorage.getItem('token');  // Assuming the JWT token is stored in localStorage
     let isAuthenticated = false;
     const currentTime = Date.now()/1000;
@@ -15,7 +16,7 @@ const Book = ({ book }) => {
       console.log("tesssssssssssssssst");
       isAuthenticated = true;
     }
-  
+
     const handleClick = (id) => {
       if (jwtDecode(token).exp < currentTime) {
         console.log("shit")
@@ -24,32 +25,34 @@ const Book = ({ book }) => {
       }else  {
         console.log(token);
         try {
-          axios.post(`http://localhost:8080/lib/user/addtocart/${id}`, 
-          {id} , 
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            } 
-          }
-          );
+            axios.delete(`http://localhost:8080/lib/admin/delete/book/${id}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                } 
+              } ,
+              {id});
         } catch (error) {
           console.error(error);
         }
     
     }
+
+    
       console.log("dammmmmmmmmmmmmmmmmmmmmmmmmmmn")
        // Handle the click event here
     };
     return (
         <div className="book">
+
                     <div>
-                           <img  src={book.cover !== null ? book.cover : 'https://via.placeholder.com/400'}/>
+                           <img src={adminbook.cover !== null ? adminbook.cover : 'https://via.placeholder.com/400'} />
                     </div>
                     <div>
-                        <button onClick={() => handleClick(book.id)} className="form-control" > Add to cart </button>
+                        <button onClick={() => handleClick(adminbook.id)} className="form-control" > remove </button>
                     </div>
+                    
         </div>
     );
 }
 
-export default Book;
+export default AdminBook;

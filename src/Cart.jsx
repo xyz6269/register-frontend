@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Book from './Book';
+import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [items, setItems] = useState([]);
   const token = localStorage.getItem('token');
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -47,35 +50,39 @@ const Cart = () => {
 
   return (
     <div>
-      <h1>Cart</h1>
-      <div>
+      <h1>Votre Panier</h1>
+     <div>
+             <CloseIcon fontSize='large' className='exiticon' 
+             onClick={(e) => navigate('/home')}
+             />
+      </div>
             {
                 items?.length > 0
                 ?(
                   <div className="container">
                      {items.map((item) => (
                      <div className="book" key={item.id}>
-                     <div>
-                         <p>{item.isbn}</p>
-                     </div>
-                     <div>
-                         <img src={item.cover !=="N/A" ? item.cover : 'https://via.placeholder.com/400' } alt="Not available"/>
-                     </div>
-                     <div>
-                         <button onClick={() => removeItem(item.id)} className="form-control" >remove from cart</button>
-                     </div>
+                      <div>
+                        <h3>{item.isbn}</h3>
+                    </div>
+                    <div>
+                           <img  src={item.cover !== null ? item.cover : 'https://via.placeholder.com/400'}/>
+                    </div>
+                    <div>
+                        <button onClick={() => removeItem(item.id)} className="form-control" > Remove from cart </button>
+                    </div>
                      
                   </div>
                      ))}
                   </div>
-                ) : (
+                ) : ( 
                     <div className="empty"> 
                     <h2> you're cart is empty  </h2>
                     </div>
                 )   
             }
             </div>
-    </div>
+    
   );
 };
 

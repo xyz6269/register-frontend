@@ -2,15 +2,14 @@ import { useState , useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { config } from "process";
-import CloseIcon from '@mui/icons-material/Close';
 
 // Set this wherever you get your token, you can add some logic at the initialization of the app to restore a token from localStorage as well, you only need to do this when you initialzie or reassign your token
 
 
-const Profile = () => {
+const AdminBook = () => {
   const token = localStorage.getItem('token');
   const [data, setData] = useState([]);
-  const navigate = useNavigate('/home')
+  const navigate = useNavigate();
   console.log(token);
   console.log("sfuckkkkkkkkkkkkk")
   
@@ -43,23 +42,22 @@ const Profile = () => {
     }
   },[])
 
-
+   const exit = () => {
+    return navigate('/admin');
+   }
 
     return (
      <div>
-       <div>
-             <CloseIcon fontSize='large' className='exiticon' 
-             onClick={(e) => navigate('/home')}
-             />
-      </div>
       <h1>Profile</h1>
-      <p>Nom : {data.lastName} </p>
-      <p>Prenom  : {data.firsName} </p>
+      <p>First Name : {data.firstName} </p>
+      <p>Last Name  : {data.lastName} </p>
       <p>Email      : {data.email}    </p>
-     
+      <div>
+              <button onClick={exit} className="form-control" > return </button>
+      </div>
     </div>
     
     );
 }
 
-export default Profile;
+export default AdminBook;

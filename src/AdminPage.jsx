@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Book from './Book'
+import Adminbook from './AdminBook'
 import profileIcon from './user.png'
 import axios from 'axios';
-import CartIcon from '@mui/icons-material/ShoppingCart';
 import Ordericon from '@mui/icons-material/Inventory2';
+import UsersIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
-import Notis from '@mui/icons-material/Notifications';
-import Search from '@mui/icons-material/Search';
-import Nav from './Nav';
+import Validorders from '@mui/icons-material/AssignmentTurnedIn';
 
 
-function Home () {
-    const [books, setBook] = useState([]);
+const AdminPage = () => {
+
+    const [adminbooks, setBook] = useState([]);
     const [searchterm, setSearchTerm] = useState('');
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
@@ -26,55 +24,59 @@ function Home () {
         console.log("hhhhhhhhhhhhhhhhhhh");
     },[])
 
-   
     return (
         <div className="app">
-            <h1>  ESTO Library  </h1>
+            <h1> Gestionnaire BIBLIOTHEQUE ESTO </h1>
             <div>
              <PersonIcon fontSize='large' className='profileicon'
-             onClick={(e) => navigate('/profile')
+             onClick={(e) => navigate('/adminprofile')
             }
              />
             </div>
+
             <div>
-             <CartIcon fontSize='large' className='carticon' 
-             onClick={(e) => navigate('/cart')
+             <UsersIcon fontSize='large' className='carticon' 
+             onClick={(e) => navigate('/users')
             }
              />
-             </div>
+            </div>
+
              <div>
              <Ordericon fontSize='large' className='ordericon'
-             onClick={(e) => navigate('/orders')
+             onClick={(e) => navigate('/ordersmanagement')
             }
              />
-             </div>
-             <div>
-             <Notis fontSize='large' className='notiicon'
-             onClick={(e) => navigate('/orders')
+            </div>
+
+            <div>
+             <Validorders fontSize='large' className='trackingicon'
+             onClick={(e) => navigate('/ordertracking')
             }
              />
-             </div>
-             
+            </div>
         
             <div>
             {
-                books?.length > 0
+                adminbooks?.length > 0
                 ?(
                   <div className="grid-container">
-                     {books.map((book) => (
-                     <Book book={book} key={book.id} />
+                     {adminbooks.map((adminbook) => (
+                     <Adminbook adminbook={adminbook} key={adminbook.id} />
                      ))}
                   </div>
                 ) : (
                     <div className="empty"> 
-                    <h2> no books </h2>
+                    <h2> No books found </h2>
                     </div>
                 )   
             }
             </div>
+            <div>
+                    <button onClick={(e) => navigate('/bookwizard')} className="fixed-button" > Ajouter un livre </button>
+             </div>
             
         </div>
     );
 };
 
-export default Home;
+export default AdminPage;
