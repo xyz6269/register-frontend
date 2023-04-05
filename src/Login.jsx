@@ -8,6 +8,7 @@ function Login() {
     password: ''
   });
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -27,34 +28,27 @@ function Login() {
         if (data.token) {
           localStorage.setItem('token', data.token);
           console.log(data);
-          
-             axios.post(
-              'http://localhost:8080/lib/admin/isadmin',{},
-              {
-                headers: {
-                  Authorization: `Bearer ${data.token}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            ).then(response => {
-              if(response.status !== 200){
-                console.log(data.token);
-                navigate('/home');
-              }else {
-                console.log("hhhhhhhhhhhhhhhhhhhhhh achrif")
-                navigate('/admin');
-              }
-            })
-          
+          console.log(data.authorisations);
+          if (data.authorisations.length > 1){
+            navigate('/admin');
+          }else {
+            navigate('/home');
+          }
+
         } else {
           throw new Error('Login failed');
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+          
   };
 
   return (
+  
     <form onSubmit={handleSubmit}>
+      <h1>
+        AUTHENTIFICATION
+      </h1>
       <div>
         <input
         className="form-control"

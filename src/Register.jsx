@@ -36,6 +36,9 @@ function Register() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>
+        Inscription
+      </h1>
       <div>
 
         <input
@@ -84,7 +87,7 @@ function Register() {
           required
         />
       </div>
-      <button className="w-100 btn btn-lg btn-primary" type="submit"> Sign in</button>    
+      <button className="w-100 btn btn-lg btn-primary" type="submit"> register </button>    
     </form>
   );
 }

@@ -4,45 +4,45 @@ import { useNavigate } from "react-router-dom";
 import { useEffect , useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import { Button } from "bootstrap";
+import OrderDetails from "./OrderDetails";
 
 
-const Order = () =>{
-  const [items, setItems] = useState([]);
+const OrderTracking = () =>{
+  const [orders, setOrders] = useState([]);
   const token = localStorage.getItem('token');
   const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchCart = async () => {
+    const fetchOrders = async () => {
      // Retrieve JWT token from local storage
       console.log(token);
       try {
-        const response = await axios.get('http://localhost:8080/lib/user/mycart', {
+        const response = await axios.get('http://localhost:8080/lib/admin/validorders', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setItems(response.data);
-        console.log(items);
+        setOrders(response.data);
+        console.log(orders);
       } catch (error) {
         console.error(error);
       }
     };
-    fetchCart();
+    fetchOrders();
   }, []);
 
-  const submitOrder = async () => {
+
+  const ValidateReturn  = async (id) => {
     console.log(token);
     try {
         const response = await axios.post(
-          'http://localhost:8080/lib/user/submitorder',
-          {
-            // Add any data you want to send in the request body here
-          },
+          `http://localhost:8080/lib/admin/validate/return/${id}`,
+          {id},
           {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
-            },
+            }
           }
         );
     
@@ -55,36 +55,33 @@ const Order = () =>{
 
   return (
     <div>
-      <h1> Mes Demandes </h1>
+      <h1> Suivis des demandes </h1>
      <div>
              <CloseIcon fontSize="large" className='exiticon'
-             onClick={(e) => navigate('/home')}
+             onClick={(e) => navigate('/admin')}
              />
-              <div>
-                    <button onClick={submitOrder} className="fixed-button" > 
-soumettre votre commande </button>
-             </div>
-
       </div>
             {
-                items?.length > 0
+                orders?.length > 0
                 ?(
                   <div>
-                     {items.map((item) => (
-                     <div className="record-card" key={item.id}>
+                     {orders.map((order) => (
+                     <div className="record-card" key={order.id}>
+
                      <div>
-                         <p>{item.isbn}</p>
+                         <p>proprietaire : {order.orderOwner}</p>
                      </div>
-                     <div>
-                         <img src={item.cover} alt="Not available"/>
-                     </div>
+            
+                    <div>
+                        <button onClick={() => ValidateReturn(order.id)} className="w-100 btn btn-lg btn-primary" > valider le retour  </button>
+                    </div>
                      
                   </div>
                      ))}
                   </div>
                 ) : (
                     <div className="empty"> 
-                    <h2> you're cart is empty you can't submit an empty order </h2>
+                    <h2> Pas de demande valider  </h2>
                     </div>
                 )  
                 
@@ -95,4 +92,4 @@ soumettre votre commande </button>
 };
 
 
-export default Order;
+export default OrderTracking;
