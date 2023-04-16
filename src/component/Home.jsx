@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Book from './Book'
-import profileIcon from './user.png'
+import profileIcon from '../user.png'
 import axios from 'axios';
 import CartIcon from '@mui/icons-material/ShoppingCart';
 import Ordericon from '@mui/icons-material/Inventory2';
 import PersonIcon from '@mui/icons-material/Person';
 import Notis from '@mui/icons-material/Notifications';
 import Search from '@mui/icons-material/Search';
-import Nav from './Nav';
-
+import Nav from './Navbar';
+import "../Styles/Home.css"
 
 function Home () {
     const [books, setBook] = useState([]);
@@ -28,35 +28,10 @@ function Home () {
 
    
     return (
-        <div className="app">
-            <h1>  ESTO Library  </h1>
-            <div>
-             <PersonIcon fontSize='large' className='profileicon'
-             onClick={(e) => navigate('/profile')
-            }
-             />
-            </div>
-            <div>
-             <CartIcon fontSize='large' className='carticon' 
-             onClick={(e) => navigate('/cart')
-            }
-             />
-             </div>
-             <div>
-             <Ordericon fontSize='large' className='ordericon'
-             onClick={(e) => navigate('/orders')
-            }
-             />
-             </div>
-             <div>
-             <Notis fontSize='large' className='notiicon'
-             onClick={(e) => navigate('/orders')
-            }
-             />
-             </div>
-             
-        
-            <div>
+        <div>
+            <Nav/>
+    
+            <div className="list-books">
             {
                 books?.length > 0
                 ?(

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState , useEffect}  from "react";
 import axios from "axios";
-import Home from "./Home";
-import Not_available from "./NA.png";
+import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from '@mui/icons-material/Close';  
 
 const Notifications = () => {
     const token = localStorage.getItem('token');
     const [notis, setNotis] = useState([]);
+    const navigate = useNavigate();
+    
 
   
     useEffect(() => {
@@ -22,7 +24,7 @@ const Notifications = () => {
           }
           );
           setNotis(response.data);
-          console.log(data);
+          console.log(notis);
         } catch (error) {
           console.error(error);
         }
@@ -30,25 +32,46 @@ const Notifications = () => {
       fetchCart();
     }, []);
 
-    return (
-        <div>
-            {
-                notis?.length > 0
-                ?(
-                  <div className="notification">
-                     {notis.map((noti) => (
-                     <div noti={noti} key={noti.id} />
-                    ))
-                    }
-                  </div>
-                ) : (
-                    <div className="empty"> 
-                    <h2> No notifications available </h2>
-                    </div>
-                )   
-            }
-            </div>
-    );
-}
 
+    return(
+
+    <div>
+    <div>
+      <CloseIcon
+        fontSize="large"
+        className="exiticon"
+        onClick={(e) => navigate("/home")}
+      />
+    </div>
+
+    {notis?.length > 0 ? (
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+             
+            <th> id</th>
+            <th> subject </th>
+            <th> date</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {notis.map((noti) => (
+            <tr key={noti.id}>
+              <td>{noti.id}</td>
+              <td>{noti.text}</td>
+              <td>{noti.customDate}</td>
+             
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    ) : (
+      <div className="empty">
+        <h2> you have no notifications </h2>
+      </div>
+    )}
+  </div>
+);
+};
 export default Notifications;

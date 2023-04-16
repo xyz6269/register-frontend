@@ -1,250 +1,37 @@
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-  }
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-     margin-top: 40px;
-    font-size: 16px;
-  }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input[type="email"] {
-  
-    margin-bottom: -1px;
-
-  }
-  .form-signin input[type="password"] {
-    margin-bottom: 30px;
-
-  }
-  .empty {
-    width: 100%;
-    margin-top: 3rem;
-  }
-  
-  .empty h2 {
-    font-size: 1.25rem;
-    color: cornflowerblue;
-    font-family: var(--font-raleway);
+body {
+    background-image: url('ESTO.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
   }
 
-  .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 50px;
-  }
+  h1{
+    text-align: center; /* center the text */
+}
 
-  .book {
-    border-radius: 15px;
-    width: 100%;
-    height: auto;
-    grid-template-columns: 1fr 1fr 1fr;
-    place-items: center;
-  } 
-  
- 
-  .book h3{
-    font-size: 2.25rem;
-    color: black;
-    font-weight: bold;
-    text-decoration: underline;
-    font-style :normal;
-    font-family: Arial, sans-serif;
-    font-family: var(--font-raleway);
-  }
 
-    
-  .book img {
-    width: 300px;
-    height: 370px;
-  }
-  
+.exiticon{
+  position: fixed; /* fix the position of the icon */
+  top: 10px; /* set the distance from the top of the viewport */
+  right: 10px; /* set the distance from the right of the viewport */
+  transform: translate(-50%, 30%);
+}
 
-    .profileicon{
-      background-color: white;
-      position: absolute;
-      top: 35px;
-      left: 30px;
-      width: 70px;
-      height: 70px;
-      border-radius: 60%;
-    }
+.fixed-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #00ced1;
+  color: white;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    .trackingicon{
-      background-color: white;
-      position: absolute;
-      top: 35px;
-      left: 200px;
-      width: 70px;
-      height: 70px;
-      border-radius: 60%;
-    }
-
-    .carticon{
-      background-color: white;
-      position: absolute;
-      top: 35px;
-      left: 1800px;
-      width: 70px;
-      height: 70px;
-      border-radius: 80%;
-    }
-
-    .notiicon{
-      background-color: white;
-      position: absolute;
-      top: 35px;
-      left: 200px;
-      width: 70px;
-      height: 70px;
-      border-radius: 80%;
-    }
-
-    .exiticon{
-        background-color: white;
-        position: absolute;
-        top: 25px;
-        left: 1860px;
-        width: 70px;
-        height: 70px;
-        border-radius: 60%;
-    }
-    .ordericon{
-      background-color: white;
-      position: absolute;
-      top: 35px;
-      left: 1650px;
-      width: 70px;
-      height: 70px;
-      border-radius: 60%;
-    }
-    .record-card {
-      display: inline-block;
-      width: 300px; /* adjust as needed */
-      margin: 40px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-      padding: 70px;
-      background-color: #fff;
-    }
-    
-    .record-card img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin-bottom: 10px;
-    }
-    
-    .record-card p {
-      font-size: 1em;
-      margin: 0;
-      line-height: 1.2;
-    }
-    
-    .fixed-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      padding: 10px 20px;
-      background-color: #fff;
-      color: #1169dd;
-      border-radius: 5px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      font-size: 1.2em;
-    }
-    
-    .fixed-button:hover {
-      background-color: #3e8e41;
-    }
-
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    
-    .button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: blueviolet;
-      border: none;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-    .notification-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .notification {
-      width: 100%;
-      max-width: 400px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-      background-color: #f2f2f2;
-      border-radius: 8px;
-      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      overflow: hidden;
-    }
-    
-    .notification .title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-    
-    .notification .message {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    
-    body {
-      background-image: url('ESTO.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-      backdrop-filter: blur(1 px);
-      padding: 0;
-      margin: 0;
-    }    
- 
-
-    h1{
-   /* add padding to create some space between the text and the border */
-     display: flex;
-     font-size: 3rem; /* increase font-size to make the text bigger */
-     font-weight: bold; /* make the text bold to make it more prominent */
-     text-transform: uppercase;
-     color: #010a11;
-     text-decoration: underline;  
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     margin-top: 20px;
-     text-align: center;
-  }
-
-    
-    
-    
+button:hover {
+  background-color: #0097a7;
+}

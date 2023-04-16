@@ -1,6 +1,8 @@
 import { useState , useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
+import unk from "./user.png"
 import { config } from "process";
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -44,22 +46,54 @@ const Profile = () => {
   },[])
 
 
+  const logout = async () => {
+    try {
+      localStorage.removeItem("token");
+      navigate('/login')
+    }catch(error) {
+      console.error(error);
+    }
+  }
 
-    return (
-     <div>
-       <div>
-             <CloseIcon fontSize='large' className='exiticon' 
+
+
+
+
+
+  return (
+    <div className="vh-100" >
+      <div >
+             <CloseIcon fontSize="large" className='exiticon'
              onClick={(e) => navigate('/home')}
              />
       </div>
-      <h1>Profile</h1>
-      <p>Nom : {data.lastName} </p>
-      <p>Prenom  : {data.firsName} </p>
-      <p>Email      : {data.email}    </p>
-     
+      
+      <MDBContainer className="container py-5 h-100">
+        <MDBRow className="justify-content-center align-items-center h-100">
+          <MDBCol md="12" xl="4">
+            <MDBCard style={{ borderRadius: '15px' }}>
+              <MDBCardBody className="text-center">
+                <div className="mt-3 mb-4">
+                  <MDBCardImage src={unk}
+                    className="rounded-circle" fluid style={{ width: '100px' }} />
+                </div>
+                <MDBTypography tag="h4">first name : {data.firstName}</MDBTypography>
+                <MDBTypography tag="h4">last name : {data.lastName}</MDBTypography>
+                <MDBCardText className="text-muted mb-4">
+                  email <span className="mx-2">|</span> <a href={data.email}>{data.email}</a>
+                </MDBCardText>
+                
+                <MDBBtn rounded size="lg" onClick={(e) => logout()}>
+                  Log out
+                </MDBBtn>
+               
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </div>
-    
-    );
+  );
 }
 
 export default Profile;
